@@ -224,6 +224,56 @@ Purchase: http://wrapbootstrap.com
                     </ul>
                 </li>
 
+                <li >
+                    <a href="#" class="menu-dropdown">
+                        <i class="menu-icon fa fa-users"></i>
+                        <span class="menu-text">RBAC管理</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                    <ul class="submenu" >
+                        <li >
+                            <a href="#" class="menu-dropdown">
+                                    <span class="menu-text">
+                                        角色管理
+                                    </span>
+                                <i class="menu-expand"></i>
+                            </a>
+
+                            <ul class="submenu" >
+                                <li>
+                                    <a href="{{ url('admin/role/create') }}">
+                                        <i class="menu-icon fa  fa-male"></i>
+                                        <span class="menu-text">添加角色</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="submenu" >
+                        <li >
+                            <a href="#" class="menu-dropdown">
+                                    <span class="menu-text">
+                                        权限管理
+                                    </span>
+                                <i class="menu-expand"></i>
+                            </a>
+
+                            <ul class="submenu" >
+                                <li>
+                                    <a href="">
+                                        <i class="menu-icon fa  fa-key"></i>
+                                        <span class="menu-text">添加权限</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
                  <li>
                     <a href="#" class="menu-dropdown">
                         <i class="menu-icon fa fa-user-md"></i>

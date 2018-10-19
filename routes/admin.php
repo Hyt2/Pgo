@@ -39,7 +39,11 @@ function () {
 	Route::resource('ad', 'AdController'); // 前台用户
 
 	Route::any('profile', 'LoginController@profile'); // 修改头像
-	Route::any('doprofile', 'LoginController@doprofile'); 
+	Route::any('doprofile', 'LoginController@doprofile');
+
+
+	//RBAC
+    Route::resource('role','RoleController'); //角色路由
 });
 
 
