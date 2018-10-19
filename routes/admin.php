@@ -7,14 +7,9 @@
  * 直接写控制器名称
  */
 
-
-
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
-	Route::any('admin/login','Admin\LoginController@login'); // 用户登录
-	Route::any('admin/dologin','Admin\LoginController@dologin'); // 用户登录
-	Route::any('admin/cap','Admin\LoginController@captcha'); // 用户登录
-});
-
+Route::any('admin/login','Admin\LoginController@login'); // 用户登录
+Route::any('admin/dologin','Admin\LoginController@dologin'); // 用户登录
+Route::any('admin/cap','Admin\LoginController@captcha'); // 用户登录
 Route::group(['middleware' => 'adminlogin','prefix' => 'admin', 'namespace' => 'Admin'], 
 function () {
 	// * @url admin/links 
