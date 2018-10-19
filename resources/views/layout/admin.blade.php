@@ -241,6 +241,13 @@ Purchase: http://wrapbootstrap.com
 
                             <ul class="submenu" >
                                 <li>
+                                    <a href="{{ url('admin/role') }}">
+                                        <i class="menu-icon fa  fa-eye"></i>
+                                        <span class="menu-text">浏览角色</span>
+                                    </a>
+                                </li>
+
+                                <li>
                                     <a href="{{ url('admin/role/create') }}">
                                         <i class="menu-icon fa  fa-male"></i>
                                         <span class="menu-text">添加角色</span>
