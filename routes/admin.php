@@ -44,6 +44,7 @@ function () {
 
 	//RBAC
     Route::resource('role','RoleController'); //角色路由
+    Route::resource('permission','PermissionController'); //权限路由
 });
 
 

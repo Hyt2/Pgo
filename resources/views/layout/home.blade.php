@@ -8,8 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
   <link rel="stylesheet" href="{{ asset(_HOME_ . '/css') }}/common.css" /> 
   <link rel="stylesheet" type="text/css" href="{{ asset(_HOME_ . '/css') }}/index.css" />
-
- </head> 
+ </head>
  <body> 
   <script>
 // 全局变量

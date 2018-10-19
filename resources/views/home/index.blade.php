@@ -1,7 +1,7 @@
 @extends('layout.home')
 @section('content')
 
- <div class="first-screen"> 
+<div class="first-screen">
    <div class="banner"> 
     <a class="banner-btn banner-prev" href="javascript:void(0);" name="index1_none_lbgg_qhan01" role="left"> <span class="btn-bg"></span> <i class="arr"></i> </a> 
     <a class="banner-btn banner-next" href="javascript:void(0);" name="index1_none_lbgg_qhan02" role="right"> <span class="btn-bg"></span> <i class="arr"></i> </a> 

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Model\Admin\RoleModel;
+use App\Http\Model\Admin\PermissionModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mockery\Exception;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $res = RoleModel::paginate(10);
-        return view('admin.role.index',['title'=>'RBAC管理','title2'=>'角色管理 / 浏览角色','res'=>$res]);
+        $res = PermissionModel::paginate(10);
+        return view('admin.permission.index',['title'=>'RBAC管理','title2'=>'权限管理 / 浏览权限','res'=>$res]);
     }
 
     /**
@@ -27,7 +27,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.role.add',['title'=>'RBAC管理','title2'=>'角色管理 / 添加角色']);
+        return view('admin.permission.add',['title'=>'RBAC管理','title2'=>'权限管理 / 添加权限']);
+
     }
 
     /**
@@ -38,21 +39,23 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = $request->except('_token');
+        $per = $request->except('_token');
         $this->validate($request,[
-            'role_name' => 'required',
+            'per_name' => 'required',
+            'per_url' => 'required',
         ],[
-            'role_name.required' => '角色不能为空'
+            'per_name.required' => '权限名称不能为空',
+            'per_url.required' => '权限地址不能为空',
         ]);
         //添加到数据库
         try{
-            $rs =RoleModel::create($role);
+            $rs =PermissionModel::create($per);
 
             if($rs){
-                return redirect(url('/admin/role'))->with('success','角色添加成功');
+                return redirect(url('/admin/permission'))->with('success','权限添加成功');
             }
         }catch(Exception $e){
-            return back()->with('error','角色添加失败');
+            return back()->with('error','权限添加失败');
         }
     }
 
@@ -75,8 +78,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = RoleModel::find($id);
-        return view('admin.role.edit',['title'=>'RBAC管理','title2'=>'角色管理 / 修改角色','res'=>$role]);
+        $per = PermissionModel::find($id);
+        return view('admin.permission.edit',['title'=>'RBAC管理','title2'=>'权限管理 / 修改权限','res'=>$per]);
     }
 
     /**
@@ -88,20 +91,22 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = $request->except('_token','_method');
+        $per = $request->except('_token','_method');
         $this->validate($request,[
-            'role_name' => 'required',
+            'per_name' => 'required',
+            'per_url' => 'required',
         ],[
-            'role.required' => '角色不能为空'
+            'per_name.required' => '权限名称不能为空',
+            'per_url.required' => '权限地址不能为空',
         ]);
         try{
-            $rs =RoleModel::where('id',$id)->update($role);
+            $rs = PermissionModel::where('id',$id)->update($per);
 
             //            dump($res);  // 1表示修改  0表示未修改
             if($rs){
-                return redirect(url('/admin/role'))->with('success','修改成功');
+                return redirect(url('/admin/permission'))->with('success','修改成功');
             }else{
-                return redirect(url('/admin/role'));
+                return redirect(url('/admin/permission'));
             }
         }catch (Exception $r){
             return back()->with('error','修改失败');
@@ -118,10 +123,10 @@ class RoleController extends Controller
     {
         //暂时直接删除，为判断链表
         try{
-            $rs =RoleModel::where('id',$id)->delete();
+            $rs =PermissionModel::where('id',$id)->delete();
 
             if($rs){
-                return redirect(url('/admin/role'))->with('success','角色删除成功');
+                return redirect(url('/admin/permission'))->with('success','角色删除成功');
             }
         }catch(Exception $e){
             return back()->with('error','角色删除失败');

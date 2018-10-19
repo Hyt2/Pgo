@@ -269,12 +269,18 @@ Purchase: http://wrapbootstrap.com
 
                             <ul class="submenu" >
                                 <li>
-                                    <a href="">
+                                    <a href="{{ url('admin/permission') }}">
                                         <i class="menu-icon fa  fa-key"></i>
-                                        <span class="menu-text">添加权限</span>
+                                        <span class="menu-text">浏览权限</span>
                                     </a>
                                 </li>
 
+                                <li>
+                                    <a href="{{ url('admin/permission/create') }}">
+                                        <i class="menu-icon fa   fa-plus"></i>
+                                        <span class="menu-text">添加权限</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
