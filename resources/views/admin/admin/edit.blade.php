@@ -17,18 +17,6 @@
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right">所属用户组</label>
-                            <div class="col-sm-6">
-                                <select name="group_id" class="form-control">
-                                    <option value="">请选择</option>
-                                    <option @if($admin->group_id == 1) selected @endif value="1">超级管理员</option>
-                                    <option @if($admin->group_id == 4) selected @endif value="4">栏目管理员</option>
-                                    <option @if($admin->group_id == 0) selected @endif value="0">系统管理员</option>
-                                </select>
-                            </div>
-                            <p class="help-block col-sm-4 red">* 必选</p>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-2 control-label no-padding-right">管理员名</label>
                             <div class="col-sm-6">
                                 <input class="form-control" placeholder="" name="name" value="{{ $admin->name }}" required="" type="text">

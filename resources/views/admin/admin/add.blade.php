@@ -15,18 +15,7 @@
                 <div id="horizontal-form">
                     <form class="form-horizontal" role="form" action="{{ url('admin/admin') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label no-padding-right">所属用户组</label>
-                            <div class="col-sm-6">
-                                <select name="group_id" class="form-control">
-                                    <option value="">请选择</option>
-                                    <option value="1">超级管理员</option>
-                                    <option value="4">栏目管理员</option>
-                                    <option value="0">系统管理员</option>
-                                </select>
-                            </div>
-                            <p class="help-block col-sm-4 red">* 必选</p>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label no-padding-right">管理员名</label>
                             <div class="col-sm-6">

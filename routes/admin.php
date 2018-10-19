@@ -17,7 +17,7 @@ function () {
 	Route::resource('links', 'LinksController'); // 友情链接
 	Route::resource('goods_attr', 'GoodsAttrController'); // 友情链接
 	Route::resource('goods_brand', 'GoodsBrandController'); // 商品品牌
-	Route::resource('admin', 'AdminController'); // 友情链接
+	Route::resource('admin', 'AdminController'); // 管理员
 	Route::resource('goods_cate', 'CateController'); // 友情链接
 
 	Route::resource('notice', 'NoticeController'); // 后台商品公告
@@ -45,6 +45,8 @@ function () {
 	//RBAC
     Route::resource('role','RoleController'); //角色路由
     Route::resource('permission','PermissionController'); //权限路由
+    Route::get('user_role/{id}','UserRoleController@index'); //管理员-权限
+    Route::any('do_user_role','UserRoleController@do_user_role'); //管理员-权限
 });
 
 

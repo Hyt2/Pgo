@@ -2,25 +2,43 @@
 @section('title', '管理员')
 @section('content')
 <div class="page-body">
-                    
+
 <button type="button" tooltip="添加文章" class="btn btn-sm btn-azure btn-addon" onclick="javascript:window.location.href = '{{ url('admin/admin/create') }}'"> <i class="fa fa-plus"></i> Add
 </button>
 <div class="row">
+
     <div class="col-lg-12 col-sm-12 col-xs-12">
         <div class="widget">
             <div class="widget-body">
+                @if(session('error'))
+                    <div class="alert alert-danger fade in">
+                        <button class="close" data-dismiss="alert">
+                            ×
+                        </button>
+                        <i class="fa-fw fa fa-warning"></i>
+                        <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错误：</strong> {{session('error')}}</p>
+                    </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success fade in">
+                        <button class="close" data-dismiss="alert">
+                            ×
+                        </button>
+                        <i class="fa-fw fa fa-check"></i>
+                        <strong>成功：</strong> {{session('success')}}
+                    </div>
+                @endif
                 <div class="flip-scroll">
                     <table class="table table-bordered table-hover">
                         <thead class="">
                             <tr>
                                 <th class="text-center" width="6%">ID</th>
                                 <th class="text-center">管理员</th>
-                                <th class="text-center">所属用户组</th>
                                 <th class="text-center">用户头像</th>
                                 <th class="text-center">邮箱</th>
                                 <th class="text-center" width="10%">最后登录</th>
                                 <th class="text-center" width="10%">状态</th>
-                                <th class="text-center" width="16%">操作</th>
+                                <th class="text-center" width="20%">操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,7 +46,6 @@
                             <tr>
                                 <td align="center">{{ $admin->id }}</td>
                                 <td align="center">{{ $admin->name }}</td>
-                                <td align="center">{{ $admin->group_id }}</td>
                                 <td align="center">
                                 	@if($admin->img)
                                     	<img height="30" src="{{ asset(u(ADMIN_IMG) . $admin->img) }}">
@@ -47,6 +64,9 @@
                                     </label>
                                 </td>
                                 <td align="center">
+                                    <a href="{{url('/admin/user_role/'.$admin->id)}}" class="btn btn-primary btn-sm shiny">
+                                        <i class="fa fa-user-md"></i> 权限
+                                    </a>
                                     <a href="{{ url("admin/admin/$admin->id/edit") }}" class="btn btn-primary btn-sm shiny">
                                         <i class="fa fa-edit"></i> 编辑
                                     </a>
@@ -88,3 +108,9 @@
 
 </div>
 @endsection
+
+@section('js')
+    <script>
+        $('.alert-danger').delay(3000).fadeOut(2000);
+    </script>
+@stop
