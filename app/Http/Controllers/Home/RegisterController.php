@@ -33,10 +33,10 @@ class RegisterController extends CommonController
     	if(in_array($data['uemail'],$re)) return ['status'=>'2','msg'=>'该邮箱已注册,请直接登陆'];
         $code=mt_rand(1000,9999);
         $req->session()->keep(['uname','uemail']);
-        session(['uemails'=>$data['uemail']]);
-        session(['unames'=>$data['uname']]);
-        session(['code'=>$code]);
-        session(['token'=>$data['token']]);
+        session(['uemails' => $data['uemail']]);
+        session(['unames'  => $data['uname']]);
+        session(['code'    => $code]);
+        session(['token'   => $data['token']]);
         try{
             Mail::send('home.email.reg', ['id'=>'5','data'=>$data,'code'=>$code], function ($msg) use ($data){
                 //从哪发的邮件

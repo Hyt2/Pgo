@@ -9,8 +9,8 @@
 
 define('_ADMIN_', '/static/admin');
 define('_PLUS_', '/static/plus'); // 第三方插件路径
+define('_UPLOADS_', './static/uploads'); // 文件上传目录
 
-define('_UPLOADS_', '/static/uploads'); // 文件上传目录
 define('ADMIN_IMG', _UPLOADS_ . '/admin'); // 管理员头像路径
 define('CONF_IMG', _UPLOADS_ . '/conf_img'); // 系统配置图片路径
 define('GOODS_BRAND', _UPLOADS_ . '/goods_brand'); // 系统配置图片路径
@@ -32,8 +32,6 @@ define('_HOME_', '/static/home');
 
 //轮播图上传目录
 define('_AD_', '/static/uploads/ad');
-
-
 
 
 

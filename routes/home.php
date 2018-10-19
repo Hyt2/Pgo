@@ -24,9 +24,25 @@ Route::group(['namespace' => 'Home'],function(){
 
 	Route::any('reg/checkcode', 'RegisterController@checkcode'); // 注册校验验证码
 
+<<<<<<< HEAD
 	Route::any('reg/reg_success/{id}', 'RegisterController@regsuccess')->where('id','[a-z]\d&!\d{3}');
 	 // 注册成功提示-		
 });																				
+=======
+	Route::any('regsuccess/{id}', 'RegisterController@regsuccess')->where('id','[a-z]\d&!\d{3}'); // 注册成功提示
+
+
+
+
+	//商品文章
+    Route::get('notice_content/{id}','IndexController@notice');
+
+    //商品列表页
+    Route::resource('goodslist','GoodsController');
+
+
+});
+>>>>>>> 8ceef2cd1a57f0984f49b655761362749cd72026
 
 
 // 前台登陆模块
@@ -51,11 +67,16 @@ Route::group(['namespace' => 'Home','middleware'=>'checklogin'], function () {
 
 		Route::any('updateinfo', 'UserController@updateinfo'); // 修改用户信息
 
+<<<<<<< HEAD
 		
+=======
+		Route::any('forget', 'UserController@forget'); // 重置密码
+>>>>>>> 8ceef2cd1a57f0984f49b655761362749cd72026
 });
 
 //重置密码
 Route::group(['namespace' => 'Home'], function () {
+<<<<<<< HEAD
 		Route::any('forget', 'UserController@forget'); // 重置密码页面
 		Route::any('existsu', 'LoginController@existsu'); // 验证用户名
 		Route::any('existse', 'LoginController@existse'); // 验证邮箱
@@ -65,3 +86,9 @@ Route::group(['namespace' => 'Home'], function () {
 		Route::any('updatepass', 'LoginController@updatepass'); // 重置密码
 
 });
+=======
+		Route::any('exists', 'LoginController@exists'); // 个人中心
+
+});
+
+>>>>>>> 8ceef2cd1a57f0984f49b655761362749cd72026

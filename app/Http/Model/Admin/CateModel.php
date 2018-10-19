@@ -8,7 +8,6 @@ class CateModel extends CommonModel
 {
     
     static public $cate;
-
     protected $table='goods_category';
     protected $primaryKey='id';
 
@@ -24,7 +23,9 @@ class CateModel extends CommonModel
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['sort'];
+
+	protected $guarded = [];
+
 
     static public function getcate($pid=0){
         if(empty(self::$cate)){

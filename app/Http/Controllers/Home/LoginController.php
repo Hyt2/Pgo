@@ -143,7 +143,7 @@ class LoginController extends Controller
         }
         $data=$req->all();
         try{
-             $rs=model('User')->where('uname',$data['uname'])->count();
+            $rs=model('User')->where('uname',$data['uname'])->count();
             if($rs<1){
             return ['status'=>'0','msg'=>"该用户不存在"];
         }

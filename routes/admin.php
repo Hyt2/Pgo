@@ -8,7 +8,13 @@
  */
 
 
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], 
+
+Route::any('admin/login','Admin\LoginController@login'); // 用户登录
+Route::any('admin/dologin','Admin\LoginController@dologin'); // 用户登录
+Route::any('admin/cap','Admin\LoginController@captcha'); // 用户登录
+Route::group(['middleware' => 'adminlogin','prefix' => 'admin', 'namespace' => 'Admin'], 
 function () {
 	// * @url admin/links 
 	// @ app\Http\Controllers\Admin\LinksController
@@ -36,6 +42,8 @@ function () {
 	//轮播图模块
 	Route::resource('ad', 'AdController'); // 前台用户
 
+	Route::any('profile', 'LoginController@profile'); // 修改头像
+	Route::any('doprofile', 'LoginController@doprofile'); 
 });
 
 

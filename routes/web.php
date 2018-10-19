@@ -16,5 +16,9 @@
 
 
 include __DIR__ . '/admin.php';
+<<<<<<< HEAD
 
 include __DIR__ . '/home.php';
+=======
+include __DIR__ . '/home.php';
+>>>>>>> 8ceef2cd1a57f0984f49b655761362749cd72026

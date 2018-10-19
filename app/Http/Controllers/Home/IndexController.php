@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Home;
 
+<<<<<<< HEAD
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Admin\AdModel;
 use App\Http\Model\Admin\GoodsBrandModel;
 use App\Http\Model\Admin\NoticeCateModel;
+use App\Http\Model\Admin\NoticeModel;
 use DB;
 class IndexController extends CommonController
 {
@@ -19,42 +21,52 @@ class IndexController extends CommonController
     public function index()
     {
         //栏目
-        $res =model('Notice')->orderBy('id','desc')->paginate(5);
+        $res     = model('Notice')->orderBy('id','desc')->paginate(5);
 
         //分类
-        $data=model($this->model)->getcate();
-        // where('status','!=','1')->limit(5)
+        $data    = model($this->model)->getcate();
 
-        //栏目
-        $notice=NoticeCateModel::getcate();
-        // dd($notice);
-        //轮播图
-        // $ads=AdModel::paginate(100)->groupBy('title')['大春物'];
-        $ads=AdModel::select('src','title','ad_name')->orderBy('sort')->limit(11)->get();
-        $src=[];
-        $title=[];
+        //品牌
+        /*$brand = GoodsBrandModel::all();*/
+        $brand   = model('GoodsBrand')->orderBy('id','asc')->get();
+
+
+        $ads   = model('Ad')::select('src','title','ad_name')->orderBy('sort')->limit(11)->get();
+        $src   = [];
+        $title = [];
         foreach ($ads as $k => $v) {
-            $tit=[];
-            $src[]=$v->src;
-            $tit['title']=$v->title;
-            $tit['ad_name']=$v->ad_name;
-            $title[]=$tit;
+            $tit            = [];
+            $src[]          = $v->src;
+            $tit['title']   = $v->title;
+            $tit['ad_name'] = $v->ad_name;
+            $title[]        = $tit;
         }
-        $ads=[$src,$title];
-        // dd($ads);
-        //前台页面
-        return view('home.index.index',['data'=>$data,'res'=>$res,'ads'=>$ads,'notice'=>$notice]);
+        $ads = [$src,$title];
+
+        return view('home.index.index',[
+            'data'   => $data,
+            'res'    => $res,
+            'brand'  => $brand,
+            'ads'    => $ads,
+        ]);
     }
 
+
     /**
-     * 前台商品详情
-     * @url /goods_detail
-     * @return \Illuminate\Http\Response
+     * 前台商品文章显示
+     *
      */
-    public function goods()
+    public function notice($id)
     {
-        
-        return view('home.goods');
+        $content = NoticeModel::find($id);
+        if($content){
+            $num = $content->notice_show;
+            $num ++;
+            NoticeModel::where('id',$id)->update(['notice_show'=>$num]);
+        }
+        $res = NoticeModel::orderBy('notice_show','desc')->paginate(10);
+
+        return view('home.notice_content',['content'=>$content,'res'=>$res]);
     }
 
     /**
