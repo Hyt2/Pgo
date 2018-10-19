@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Home;
-
-<<<<<<< HEAD
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Admin\AdModel;
