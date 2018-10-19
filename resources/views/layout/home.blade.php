@@ -286,6 +286,9 @@ var TOP_BANNER_DATA = {
       <div class="clear"></div> 
      </div> 
     <div class="ng-help-box">
+      <?php 
+          $notice  = model('NoticeCate')::getcate();
+       ?>
     @foreach($notice as $kk=>$vv) 
       <dl> 
        <dt name="public0_none_wb_bzxx01">
