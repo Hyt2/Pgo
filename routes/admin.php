@@ -45,8 +45,10 @@ function () {
 	//RBAC
     Route::resource('role','RoleController'); //角色路由
     Route::resource('permission','PermissionController'); //权限路由
-    Route::get('user_role/{id}','UserRoleController@index'); //管理员-权限
-    Route::any('do_user_role','UserRoleController@do_user_role'); //管理员-权限
+    Route::get('user_role/{id}','UserRoleController@index'); //管理员-角色
+    Route::any('do_user_role','UserRoleController@do_user_role'); //管理员-角色
+    Route::get('role_per/{id}','RolePerController@index'); //管理员-权限
+    Route::any('do_role_per','RolePerController@do_role_per'); //管理员-权限
 });
 
 

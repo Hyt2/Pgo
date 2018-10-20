@@ -70,6 +70,7 @@
                                     </td>
 
                                     <td >
+                                        <a href="{{url('/admin/role_per/'.$v->id)}}" class="btn btn-info btn-xs edit"><i class="fa fa-edit"></i> 权限</a>
                                         <a href="{{url('/admin/role/'.$v->id.'/edit')}}" class="btn btn-info btn-xs edit"><i class="fa fa-edit"></i> 修改</a>
                                         <form action="{{url('/admin/role/'.$v->id)}}" method="post" style='display:inline'>
                                             {{csrf_field()}}

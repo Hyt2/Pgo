@@ -65,7 +65,7 @@
                                 </td>
                                 <td align="center">
                                     <a href="{{url('/admin/user_role/'.$admin->id)}}" class="btn btn-primary btn-sm shiny">
-                                        <i class="fa fa-user-md"></i> 权限
+                                        <i class="fa fa-user-md"></i> 角色
                                     </a>
                                     <a href="{{ url("admin/admin/$admin->id/edit") }}" class="btn btn-primary btn-sm shiny">
                                         <i class="fa fa-edit"></i> 编辑
