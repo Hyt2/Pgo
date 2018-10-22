@@ -142,8 +142,11 @@ loadBanner();
   <div class="activityEnter"> 
    <ul> 
     @foreach($brand as $k=>$v)
-    <li> <a name="index2_none_huichang_04" target="_blank" href="{{$v->brand_url}}" > <img lazy-src="{{_UPLOADS_.'/goods_brand'.'/'.$v->brand_logo}}"/> </a> </li>
-    
+        <li>
+            <a  target="_blank" href="{{url('/goods_brand/'.$v->id)}}" >
+                <img lazy-src="{{_UPLOADS_.'/goods_brand'.'/'.$v->brand_logo}}"/>
+            </a>
+        </li>
     @endforeach 
    </ul> 
   </div> 

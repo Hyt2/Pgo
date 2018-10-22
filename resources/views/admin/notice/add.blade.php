@@ -30,7 +30,7 @@
                                 <div class="col-sm-3">
                                     <select class="form-control" name="cate_id" data-bv-field="country">
                                         @foreach($res as $k=>$v)
-                                        <option value="{{$v->id}}">{{$v->cate_name}}</option>
+                                        <option @if ($v->cid == '0') disabled @endif value="{{$v->id}}">{{$v->cate_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -29,10 +29,12 @@ Route::group(['namespace' => 'Home'],function(){
 
 	//商品文章
     Route::get('notice_content/{id}','IndexController@notice');
+    Route::get('notice_cate/{id}','IndexController@notice_cate');
 
     //商品列表页
     Route::resource('goodslist','GoodsController');
-
+    //首页点击品牌搜索
+    Route::get('goods_brand/{id}','GoodsController@brand');
 
 });
 

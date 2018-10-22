@@ -303,7 +303,7 @@ var TOP_BANNER_DATA = {
          </dt>
          @foreach($vv->sub as $k=>$v) 
           <dd>
-            <a name="public0_none_wb_bzxx0101" rel="nofollow" target="_blank" href="http://help.suning.com/page/id-222.htm">{{$v->cate_name}}</a>
+            <a  rel="nofollow" target="_blank" href="{{url('/notice_cate/'.$v->id)}}">{{$v->cate_name}}</a>
          </dd>
          @endforeach 
         </dl>

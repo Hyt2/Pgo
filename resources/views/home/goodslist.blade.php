@@ -40,5 +40,11 @@
 @section('js')
     <script>
         $('.ng-sort-list-box').attr('style','display: none;');
+//        $('.ng-all-hook').scroll(function(){
+//            console.log(111);
+//        });
+        window.scroll(function(){
+            $('.ng-sort-list-box').attr('style','display: none;');
+        });
     </script>
 @stop

@@ -9,7 +9,7 @@
                 <li style="border:dotted 1px silver;margin-top: 10px;">
                     <p style="text-align: center"><a href="{{url('notice_content/'.$v->id)}}"><b>{{$v->title}}</b></a></p>
                     <p style="text-align:center">作者：{{$v->notice_name}}</p>
-                    <p style="text-align:center">{{date('Y-m-d H:i:s',$content->create_time)}}</p>
+                    <p style="text-align:center">{{date('Y-m-d H:i:s',$v->create_time)}}</p>
                 </li>
             @endforeach
 
@@ -17,7 +17,7 @@
         </ul>
         <div id="gr">
             <div id="gr_1">
-                  <b style="color: orange">{{$content->cate->cate_name}}</b>
+                <b style="color: orange">{{$content->cate->cate_name}}</b>
             </div>
             <div id="gr_2">
                 <sanp style="font-size: 12px">作者：{{$content->notice_name}}</sanp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

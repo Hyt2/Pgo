@@ -105,4 +105,21 @@ class GoodsController extends Controller
     {
         //
     }
+
+    /**
+     * 首页品牌搜索
+     */
+    public function  brand($id){
+        //同品牌排行榜
+        $res = GoodsModel::orderBy('goods_show','desc')->where(function($query) use ($id) {
+            $query->where('goods_hs','0');
+            $query->where('brand_id',$id);
+        })->paginate(5);
+        //同品牌所有商品
+        $brand = GoodsModel::where(function($query) use ($id){
+            $query->where('goods_hs','0');
+            $query->where('brand_id',$id);
+        })->paginate(24);
+        return view('home.goodslist',['goods'=>$brand,'res'=>$res]);
+    }
 }

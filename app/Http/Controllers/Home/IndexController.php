@@ -65,9 +65,27 @@ class IndexController extends CommonController
             NoticeModel::where('id',$id)->update(['notice_show'=>$num]);
         }
         $res = NoticeModel::orderBy('notice_show','desc')->paginate(10);
-
         return view('home.notice_content',['content'=>$content,'res'=>$res]);
     }
+    /**
+     * 前台栏目跳转显示栏目文章
+     */
+    public function notice_cate($id)
+    {
+//        dd($id);
+        $content = NoticeModel::where('cate_id',$id)->first();
+//        dd($content);
+        if($content){
+            $num = $content->notice_show;
+            $num ++;
+            NoticeModel::where('id',$id)->update(['notice_show'=>$num]);
+            $res = NoticeModel::orderBy('notice_show','desc')->paginate(10);
+            return view('home.notice_cate',['res'=>$res,'content'=>$content]);
+        }else{
+            return back();
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.
