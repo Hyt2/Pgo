@@ -103,7 +103,7 @@ var TOP_BANNER_DATA = {
    <div class="ng-header-con"> 
     <!--促销图片维护]]--> 
     <div class="ng-header-box"> 
-     <a href="index.html" name="index2_none_logo_logo01" class="logo-set" title="苏宁易购"> <img alt="苏宁易购" src="{{ asset(_HOME_ . '/images') }}/logo/180ico.png" /> </a> 
+     <a href="{{url('/')}}" name="index2_none_logo_logo01" class="logo-set" title="佩奇易购"> <img alt="佩奇易购" src="{{ asset(_HOME_ . '/images') }}/logo/180ico.png" /> </a>
      <img src="http://script.suning.cn/images/ShoppingArea/Common/blank.gif" src3="http://img.suning.cn/project/cmsWeb/suning/homepage/v1/images/slogn.png" class="slogn" /> 
     </div> 
     <div class="ng-search"> 

@@ -14,7 +14,12 @@ class UserRoleController extends Controller
     public function index($id){
         $user_role = AdminModel::find($id);
         $role = RoleModel::orderBy('id','asc')->get();
-        $res = DB::table('user_role')->where('user_id',$id)->pluck('role_id')->toArray();
+//        $res = DB::table('user_role')->where('user_id',$id)->pluck('role_id')->toArray();
+        $user = $user_role->roles;
+        $res = [];
+        foreach ($user as $k=>$v){
+            $res[] = $v->id;
+        }
 
         return view('admin.user_role.index',['title'=>'RBAC管理','title2'=>'用户权限','user_role'=>$user_role,'role'=>$role,'res'=>$res]);
     }

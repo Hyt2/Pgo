@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Validator;
 class AdminModel extends CommonModel
 {
     protected $table = 'admin';
-    
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Http\Model\Admin\RoleModel','user_role','user_id','role_id');
+    }
+
     public function getData() 
     {
     	return $this->orderBy('id', $this->order)->paginate($this->page);

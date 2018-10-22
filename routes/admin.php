@@ -10,7 +10,11 @@
 Route::any('admin/login','Admin\LoginController@login'); // 用户登录
 Route::any('admin/dologin','Admin\LoginController@dologin'); // 用户登录
 Route::any('admin/cap','Admin\LoginController@captcha'); // 用户登录
-Route::group(['middleware' => 'adminlogin','prefix' => 'admin', 'namespace' => 'Admin'], 
+
+Route::get('admin/index', 'Admin\IndexController@index')->middleware('adminlogin'); // 后台首页
+
+
+Route::group(['middleware' => ['adminlogin','roleper'],'prefix' => 'admin', 'namespace' => 'Admin'],
 function () {
 	// * @url admin/links 
 	// @ app\Http\Controllers\Admin\LinksController
@@ -29,8 +33,6 @@ function () {
 	
 	Route::any('conf/info/', 'ConfController@info'); // 配置项
 	Route::resource('conf', 'ConfController'); // 系统配置
-
-	Route::get('index', 'IndexController@index'); // 后台首页
 
 	// 前后台用户模块
 	Route::resource('user', 'UserController'); // 前台用户

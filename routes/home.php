@@ -14,8 +14,6 @@ Route::group(['namespace' => 'Home'],function(){
 	Route::get('/', 'IndexController@index');
 	Route::get('/test', 'IndexController@test');
 
-	Route::get('goods', 'IndexController@goods');
-	
 	Route::any('register', 'RegisterController@register'); // 前台注册页面
 
 	Route::any('reg/regcheck', 'RegisterController@regCheck'); // 检测用户是否已存在
