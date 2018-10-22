@@ -35,9 +35,9 @@
                             <div class="form-group">
                                 <label for="username" class="col-sm-2 control-label no-padding-right">权限地址</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" id="username" placeholder="请填写权限地址" name="per_url" required="" type="text">
+                                    <input class="form-control" id="username" placeholder="请填写权限地址。" name="per_url" required="" type="text">
                                 </div>
-                                <p class="help-block col-sm-4 red">* 必填</p>
+                                <p class="help-block col-sm-4 red">* 必填。例：[/admin/index]</p>
                             </div>
 
                             <div class="form-group">

@@ -7,14 +7,12 @@
             <h3 style="font-size:15px;text-indent:10px;">热销商品</h3>
             @foreach($res as $k=>$v)
             <li>
-                <img class="tg-img" width="190" src="{{url(asset(GOODS_IMG.'/'.$v->goods_img))}}" alt="">
+                <a href="{{url('goodslist/'.$v->id)}}"><img class="tg-img" width="190" src="{{url(asset(GOODS_IMG.'/'.$v->goods_img))}}" alt=""></a>
                 <div class="tg-name">{{$v->goods_name}}</div>
                 <div class="tg-price">¥{{$v->shop_price}}</div>
                 <div class="tg-pj">已有302人评价</div>
             </li>
             @endforeach
-
-
         </ul>
         <div id="gr">
             <div id="gr_1">

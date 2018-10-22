@@ -16,7 +16,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $res = PermissionModel::paginate(10);
+        $res = PermissionModel::orderBy('id','asc')->paginate(10);
         return view('admin.permission.index',['title'=>'RBAC管理','title2'=>'权限管理 / 浏览权限','res'=>$res]);
     }
 
@@ -42,10 +42,11 @@ class PermissionController extends Controller
         $per = $request->except('_token');
         $this->validate($request,[
             'per_name' => 'required',
-            'per_url' => 'required',
+//            'per_url' => 'required|regex:/^\/[\/\w]+$/',
         ],[
             'per_name.required' => '权限名称不能为空',
             'per_url.required' => '权限地址不能为空',
+//            'per_url.regex' => '请参照例子格式，填写权限地址',
         ]);
         //添加到数据库
         try{

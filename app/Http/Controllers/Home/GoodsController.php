@@ -18,7 +18,7 @@ class GoodsController extends Controller
     public function index()
     {
         //暂无分类遍历
-        $goods = GoodsModel::get();
+        $goods = GoodsModel::where('goods_hs','0')->get();
 
         // 排行榜
         $res = GoodsModel::orderBy('goods_show','desc')->paginate(5);

@@ -32,6 +32,7 @@ class HasRolePermission
         $uls = \Request::getRequestUri();
 //        dump($arrs);
 //        dump($uls);
+        //解决分页，修改，删除
         $uls = preg_replace('/\/\d\//','/$id/',$uls);
 //
         $uls = preg_replace('/\/\d{1,}/','/$id',$uls);

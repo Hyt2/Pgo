@@ -300,12 +300,6 @@ Purchase: http://wrapbootstrap.com
                                 <span class="menu-text">用户管理</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="/admin/user/show">
-                                <span class="menu-text">用户详情</span>
-                            </a>
-                        </li>
-
                     </ul>
                 </li>
 
@@ -545,12 +539,7 @@ Purchase: http://wrapbootstrap.com
                                 <i class="menu-expand"></i>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <span class="menu-text">支付方式设置</span>
-                                <i class="menu-expand"></i>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
 
