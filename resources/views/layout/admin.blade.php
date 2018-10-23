@@ -221,7 +221,75 @@ Purchase: http://wrapbootstrap.com
 
                     </ul>
                 </li>
+<<<<<<< HEAD
                 <li>
+=======
+
+                <li >
+                    <a href="#" class="menu-dropdown">
+                        <i class="menu-icon fa fa-users"></i>
+                        <span class="menu-text">RBAC管理</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                    <ul class="submenu" >
+                        <li >
+                            <a href="#" class="menu-dropdown">
+                                    <span class="menu-text">
+                                        角色管理
+                                    </span>
+                                <i class="menu-expand"></i>
+                            </a>
+
+                            <ul class="submenu" >
+                                <li>
+                                    <a href="{{ url('admin/role') }}">
+                                        <i class="menu-icon fa  fa-eye"></i>
+                                        <span class="menu-text">浏览角色</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ url('admin/role/create') }}">
+                                        <i class="menu-icon fa  fa-male"></i>
+                                        <span class="menu-text">添加角色</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="submenu" >
+                        <li >
+                            <a href="#" class="menu-dropdown">
+                                    <span class="menu-text">
+                                        权限管理
+                                    </span>
+                                <i class="menu-expand"></i>
+                            </a>
+
+                            <ul class="submenu" >
+                                <li>
+                                    <a href="{{ url('admin/permission') }}">
+                                        <i class="menu-icon fa  fa-key"></i>
+                                        <span class="menu-text">浏览权限</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ url('admin/permission/create') }}">
+                                        <i class="menu-icon fa   fa-plus"></i>
+                                        <span class="menu-text">添加权限</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
+                 <li>
+>>>>>>> hyt
                     <a href="#" class="menu-dropdown">
                         <i class="menu-icon fa fa-user-md"></i>
                         <span class="menu-text"> 用户管理 </span>
@@ -234,12 +302,6 @@ Purchase: http://wrapbootstrap.com
                                 <span class="menu-text">用户管理</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="/admin/user/show">
-                                <span class="menu-text">用户详情</span>
-                            </a>
-                        </li>
-
                     </ul>
                 </li>
                 <li>
@@ -478,12 +540,7 @@ Purchase: http://wrapbootstrap.com
                                 <i class="menu-expand"></i>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <span class="menu-text">支付方式设置</span>
-                                <i class="menu-expand"></i>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
 

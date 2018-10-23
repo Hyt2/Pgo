@@ -14,8 +14,6 @@ Route::group(['namespace' => 'Home'],function(){
 	Route::get('/', 'IndexController@index');
 	Route::get('/test', 'IndexController@test');
 
-	Route::get('goods', 'IndexController@goods');
-	
 	Route::any('register', 'RegisterController@register'); // 前台注册页面
 
 	Route::any('reg/regcheck', 'RegisterController@regCheck'); // 检测用户是否已存在
@@ -30,10 +28,12 @@ Route::group(['namespace' => 'Home'],function(){
 
 	//商品文章
     Route::get('notice_content/{id}','IndexController@notice');
+    Route::get('notice_cate/{id}','IndexController@notice_cate');
 
     //商品列表页
     Route::resource('goodslist','GoodsController');
-
+    //首页点击品牌搜索
+    Route::get('goods_brand/{id}','GoodsController@brand');
 
 });
 

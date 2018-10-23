@@ -9,8 +9,7 @@
   <script src="{{_ADMIN_}}/js/jquery-2.0.3.min.js"></script> 
   <link rel="stylesheet" href="{{ asset(_HOME_ . '/css') }}/common.css" /> 
   <link rel="stylesheet" type="text/css" href="{{ asset(_HOME_ . '/css') }}/index.css" />
-
- </head> 
+ </head>
  <body> 
   <script>
 // 全局变量
@@ -105,7 +104,7 @@ var TOP_BANNER_DATA = {
    <div class="ng-header-con"> 
     <!--促销图片维护]]--> 
     <div class="ng-header-box"> 
-     <a href="index.html" name="index2_none_logo_logo01" class="logo-set" title="苏宁易购"> <img alt="苏宁易购" src="{{ asset(_HOME_ . '/images') }}/logo/180ico.png" /> </a> 
+     <a href="{{url('/')}}" name="index2_none_logo_logo01" class="logo-set" title="佩奇易购"> <img alt="佩奇易购" src="{{ asset(_HOME_ . '/images') }}/logo/180ico.png" /> </a>
      <img src="http://script.suning.cn/images/ShoppingArea/Common/blank.gif" src3="http://img.suning.cn/project/cmsWeb/suning/homepage/v1/images/slogn.png" class="slogn" /> 
     </div> 
     <div class="ng-search"> 
@@ -289,6 +288,7 @@ var TOP_BANNER_DATA = {
       <?php 
           $notice  = model('NoticeCate')::getcate();
        ?>
+<<<<<<< HEAD
     @foreach($notice as $kk=>$vv) 
       <dl> 
        <dt name="public0_none_wb_bzxx01">
@@ -301,6 +301,20 @@ var TOP_BANNER_DATA = {
        @endforeach 
       </dl>
       @endforeach 
+=======
+      @foreach($notice as $kk=>$vv) 
+        <dl> 
+         <dt name="public0_none_wb_bzxx01">
+          {{$vv->cate_name}}
+         </dt>
+         @foreach($vv->sub as $k=>$v) 
+          <dd>
+            <a  rel="nofollow" target="_blank" href="{{url('/notice_cate/'.$v->id)}}">{{$v->cate_name}}</a>
+         </dd>
+         @endforeach 
+        </dl>
+        @endforeach 
+>>>>>>> hyt
      </div> 
      <div class="ng-app-down"> 
       <p>易购客户端</p> 
