@@ -21,7 +21,7 @@ class GoodsController extends Controller
         $goods = GoodsModel::where('goods_hs','0')->get();
 
         // 排行榜
-        $res = GoodsModel::orderBy('goods_show','desc')->paginate(5);
+        $res = GoodsModel::orderBy('goods_show','desc')->where('goods_hs','0')->paginate(5);
 //        dd($res);
         return view('home.goodslist',['goods'=>$goods,'res'=>$res]);
     }
@@ -72,39 +72,6 @@ class GoodsController extends Controller
         return view('home.goods',['goods'=>$goods,'photo'=>$photo,'type'=>$type,'goods_brand'=>$goods_brand,'goods_type'=>$goods_type]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     /**
      * 首页品牌搜索

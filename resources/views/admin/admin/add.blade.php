@@ -5,7 +5,7 @@
 @section('content')
 <div class="page-body">
                     
-<div class="row">
+    <div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12">
         <div class="widget">
             <div class="widget-header bordered-bottom bordered-blue">
@@ -15,7 +15,6 @@
                 <div id="horizontal-form">
                     <form class="form-horizontal" role="form" action="{{ url('admin/admin') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
-
                         <div class="form-group">
                             <label class="col-sm-2 control-label no-padding-right">管理员名</label>
                             <div class="col-sm-6">
@@ -59,5 +58,5 @@
     </div>
 </div>
 
-                </div>
+</div>
 @endsection

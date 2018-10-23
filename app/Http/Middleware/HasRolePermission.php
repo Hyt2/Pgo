@@ -38,6 +38,7 @@ class HasRolePermission
         $uls = preg_replace('/\/\d{1,}/','/$id',$uls);
 //
         $uls = preg_replace('/\?\S{0,}/','',$uls);
+//        dd($uls);
 
         //判断
         if(in_array($uls,$arrs)){
