@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CateModel extends CommonModel
 {
-    
     static public $cate;
+    //
     protected $table='goods_category';
     protected $primaryKey='id';
 
@@ -23,24 +23,24 @@ class CateModel extends CommonModel
 	 *
 	 * @var array
 	 */
-
 	protected $guarded = [];
 
 
-    static public function getcate($pid=0){
+    static public function getcate($pid = 0){
+
+
         if(empty(self::$cate)){
-            self::$cate=self::all();
+            self::$cate = self::where('show', '=', '1')->get();
         }
         $re=[];
         foreach (self::$cate as $k => $v) {
             if($v->pid==$pid){
-                $v->sub=self::getcate($v->id);
-                $re[]=$v;
+                $v->sub = self::getcate($v->id);
+                $re[]   = $v;
             }
         }
         return $re;
     }
-
 
     public function twocate()
     {
@@ -55,4 +55,5 @@ class CateModel extends CommonModel
         }
         return $data;
     }
+
 }

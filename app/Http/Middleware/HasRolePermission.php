@@ -19,9 +19,13 @@ class HasRolePermission
      */
     public function handle($request, Closure $next)
     {
+        if (config('site.is_open_rbac') == '否') {
+            return $next($request);
+        }
+        
         $user = AdminModel::find(session('id'));
         $role = $user->roles;
-        $arr = [];
+        $arr  = [];
         foreach($role as $r1){
             $per = $r1->permissions;
             foreach ($per as $url){
@@ -30,15 +34,11 @@ class HasRolePermission
         }
         $arrs = array_unique($arr);
         $uls = \Request::getRequestUri();
-//        dump($arrs);
-//        dump($uls);
+
         //解决分页，修改，删除
-        $uls = preg_replace('/\/\d\//','/$id/',$uls);
-//
+        $uls = preg_replace('/\/\d{1,}\//','/$id/',$uls);
         $uls = preg_replace('/\/\d{1,}/','/$id',$uls);
-//
         $uls = preg_replace('/\?\S{0,}/','',$uls);
-//        dd($uls);
 
         //判断
         if(in_array($uls,$arrs)){

@@ -13,6 +13,8 @@
                 <div class="tg-pj">已有302人评价</div>
             </li>
             @endforeach
+
+
         </ul>
         <div id="gr">
             <div id="gr_1">
@@ -26,7 +28,7 @@
                     <div class="p-price">¥{{$v->shop_price}}</div>
                     <div class="p-name" >{{$v->goods_name}}</div>
                     <div class="p-special">领券立减200！低至2499！纤薄机身，2K屏，双镜头，强劲芯片，你想要的快~</div>
-                    <div class="p-pl">已有456人评价</div>
+                    <!-- <div class="p-pl">已有456人评价</div> -->
                     <div class="p-btn"><span>对比</span><span>关注</span><span>加入购物车</span></div>
                 </li>
                 @endforeach
@@ -40,11 +42,11 @@
 @section('js')
     <script>
         $('.ng-sort-list-box').attr('style','display: none;');
-//        $('.ng-all-hook').scroll(function(){
-//            console.log(111);
-//        });
-        window.scroll(function(){
-            $('.ng-sort-list-box').attr('style','display: none;');
-        });
+
+        $(function(){
+            $(window).scroll(function(){
+                $('.ng-sort-list-box').remove();
+            })
+         })
     </script>
 @stop

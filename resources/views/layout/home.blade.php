@@ -6,10 +6,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
   <title>首页</title> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
-  <script src="{{_ADMIN_}}/js/jquery-2.0.3.min.js"></script> 
   <link rel="stylesheet" href="{{ asset(_HOME_ . '/css') }}/common.css" /> 
   <link rel="stylesheet" type="text/css" href="{{ asset(_HOME_ . '/css') }}/index.css" />
- </head>
+  <script src="{{ asset(_ADMIN_ . '/js/jquery-2.0.3.min.js') }}"></script>
+ </head> 
  <body> 
   <script>
 // 全局变量
@@ -104,18 +104,19 @@ var TOP_BANNER_DATA = {
    <div class="ng-header-con"> 
     <!--促销图片维护]]--> 
     <div class="ng-header-box"> 
-     <a href="{{url('/')}}" name="index2_none_logo_logo01" class="logo-set" title="佩奇易购"> <img alt="佩奇易购" src="{{ asset(_HOME_ . '/images') }}/logo/180ico.png" /> </a>
+     <a href="{{url('/')}}" name="index2_none_logo_logo01" class="logo-set" title="佩奇易购"> <img alt="佩奇易购" src="{{ asset(_HOME_ . '/images') }}/logo/180ico.png" /> </a> 
+     <!-- <a href="{{url('/')}}" name="index2_none_logo_logo01" class="logo-set" title="佩奇易购"> <img alt="佩奇易购" src="{{ u(_CONF_IMG) . config('site.logo')}}" /> </a>  -->
      <img src="http://script.suning.cn/images/ShoppingArea/Common/blank.gif" src3="http://img.suning.cn/project/cmsWeb/suning/homepage/v1/images/slogn.png" class="slogn" /> 
     </div> 
     <div class="ng-search"> 
      <!-- PRFLS SEARCH --> 
      <div class="g-search"> 
       <i class="ng-iconfont search-icon"></i> 
-      <form method="get" onsubmit="return SFE.search.onSubmitSearch(this)"> 
+      <form method="get" onsubmit="" action="/goodslist"> 
        <div class="search-keyword-box"> 
-        <input tabindex="0" id="searchKeywords" type="text" class="search-keyword" name="index1_none_search_ss2" value="" autocomplete="off" /> 
+        <input tabindex="0" id="searchKeywords" type="text" class="search-keyword" name="goods_name" value="<?=  isset($_GET['goods_name']) ? $_GET['goods_name'] : '' ?>" autocomplete="off" /> 
        </div> 
-       <input id="searchSubmit" type="submit" class="search-btn" name="index1_none_search_ss1" value="搜索" /> 
+       <input id="searchSubmit" type="submit" class="search-btn" value="搜索" /> 
        <div id="snKeywordNew" class="g-search-hotwords"></div> 
       </form> 
       <div id="ac_results" class="g-ac-results hide"></div> 
@@ -131,11 +132,12 @@ var TOP_BANNER_DATA = {
   </div> 
   <!--header ]]--> 
   <!--sort & nav [[--> 
-  <style type="text/css">
+   <style type="text/css">
       .cate_two{
         float: left;
           height: 24px;
           margin-left: 25px;
+          margin-bottom: 25px;
           padding: 0 10px;
           color: #FFF;
           line-height: 24px;
@@ -149,68 +151,83 @@ var TOP_BANNER_DATA = {
    <div class="ng-sort ng-sort-index"> 
     <a name="public0_none_ml_qbspfl" class="ng-all-hook"> <em class="ng-iconfont"></em><span>全部商品分类</span><b></b> </a>
     <div class="ng-sort-list-box"  >
-     <ul class="sort-list"> 
+     <ul class="sort-list">
+     <?php $data = model('Cate')->getcate();?> 
       @foreach($data as $k=>$v) 
         <li id="{{$v->id}}" class="cate_one"> 
             <em class="{{$v->icon}}"></em> 
-            <a target="_blank" name="public0_none_ml1_zc010101" href="child.html?">{{$v->cate_name}}</a>
+            <a target="_blank" name="public0_none_ml1_zc010101" href="{{'/goodslist?id='.$v->id}}">{{$v->cate_name}}</a>
         </li> 
       @endforeach 
       <div class="clear"></div> 
      </ul> 
+
      <div class="ng-sort-detail"> 
-      <a name="public0_none_ml_gban" href="javascript:void(0);" class="ng-close-sort" target="_self"><em class="ng-iconfont"></em></a>
-      <div style="height: 100%;width: 100%;padding: 25px 35px 25px">
-            @foreach(model('Cate')->twocate() as $v)
-             <a href="https://shouji.suning.com/phone2018.html" target="_blank" name="public0_sortListv6_968427813_word01" title="手机频道" class="cate_two" pid="{{$v->pid}}" style="display: none">
-              {{$v->cate_name}}
-             </a>
-            @endforeach
-          </div> 
-      <div class="sort-chanel"></div> 
-      <div class="cate-list"></div> 
+       <a name="public0_none_ml_gban" href="javascript:void(0);" class="ng-close-sort" target="_self"><em class="ng-iconfont"></em></a>
+        <div style="height: 100%;width: 100%;padding: 25px 35px 25px" class="pop">
+            
+        </div> 
+        <div class="sort-chanel"></div> 
+        <div class="cate-list"></div> 
      </div> 
+
+     
     </div> 
-   </div>
-   <script type="text/javascript">
-    var data=[];
-    $('.cate_one').hover(function(){
-      var num=0;
-      var pid=$(this).attr('id');
-      $('.cate_two').each(function(){
-        if(pid==$(this).attr('pid')){
-           data[num++]=$(this);
-          $(this).css('display','block');
-        }
-      })
-    },function(){
-      var obj=null;
-      $(data).each(function(){
-        obj=$(this);
-        $(this).css('display','none');
-      });
-      $(obj).parents('div').hover(function(){
-          $(data).each(function(){
-            $(this).css('display','block');
-          });
-        },function(){
-          $(data).each(function(){
-            $(this).css('display','none');
-          });
+   </div> 
+
+     <script type="text/javascript">
+      // var data=[];
+      // $('.cate_one').hover(function(){
+      //   var num=0;
+      //   var pid=$(this).attr('id');
+      //   $('.cate_two').each(function(){
+      //     if(pid==$(this).attr('pid')){
+      //        data[num++]=$(this);
+      //       $(this).css('display','block');
+      //     }
+      //   })
+
+      // },function(){
+      //   var obj=null;
+      //   $(data).each(function(){
+      //     obj=$(this);
+      //     $(this).css('display','none');
+      //   });
+      //   $(obj).parents('div').hover(function(){
+      //       $(data).each(function(){
+      //         $(this).css('display','block');
+      //       });
+      //     },function(){
+      //       $(data).each(function(){
+      //         $(this).css('display','none');
+      //       });
+      //     })
+      // })
+      $('.cate_one').mouseover(function(){
+        var pid=$(this).attr('id');
+        $.get('/twocate',{pid:pid,'_token':"{{ csrf_token() }}"},function(data){
+            $('.pop').empty();
+            for (var i =0; i < data.length;i++) {
+              $('.pop').append($("<a href='/goodslist?cate_id="+data[i].id+"' class='cate_two'>"+data[i].cate_name+"</a>"));
+            }
         })
-    })
+      })
    </script>   
+
+
    <div class="ng-nav-index"> 
     <h4 class="ng-title"><span>特色频道</span></h4> 
     <ul class="ng-nav">
-    @foreach(model('Nav')->all() as $k=>$v)
+      <?php $navs = model('Nav')->limit(3)->get(); $i = 1; ?>
+    @foreach($navs as $k=>$v)
         <li>
-          <a name="public0_none_tspd_01 nav" href="{{$v->url}}" @if($v->new_blank=='1') target="_blank" @else target="_self" @endif>
+          <a name="public0_none_tspd_01 nav" href="/#lou-{{$i}}" @if($v->new_blank=='1') target="_blank" @else target="_self" @endif>
             {{--根据key出现不同样式--}}
           @if($k%4==1) <i class="hot"></i> @elseif($k%4==3) <i class="new"></i> @else  @endif
           {{$v->name}}
           </a>
         </li> 
+        <?php $i++ ?>
       @endforeach 
     </ul> 
    </div> 
@@ -284,26 +301,13 @@ var TOP_BANNER_DATA = {
       </dl> 
       <div class="clear"></div> 
      </div> 
-    <div class="ng-help-box">
+
+      <div class="ng-help-box">
       <?php 
           $notice  = model('NoticeCate')::getcate();
        ?>
-<<<<<<< HEAD
-    @foreach($notice as $kk=>$vv) 
-      <dl> 
-       <dt name="public0_none_wb_bzxx01">
-        {{$vv->cate_name}}
-       </dt>
-       @foreach($vv->sub as $k=>$v) 
-        <dd>
-          <a name="public0_none_wb_bzxx0101" rel="nofollow" target="_blank" href="http://help.suning.com/page/id-222.htm">{{$v->cate_name}}</a>
-       </dd>
-       @endforeach 
-      </dl>
-      @endforeach 
-=======
       @foreach($notice as $kk=>$vv) 
-        <dl> 
+        <dl style=""> 
          <dt name="public0_none_wb_bzxx01">
           {{$vv->cate_name}}
          </dt>
@@ -314,14 +318,10 @@ var TOP_BANNER_DATA = {
          @endforeach 
         </dl>
         @endforeach 
->>>>>>> hyt
      </div> 
-     <div class="ng-app-down"> 
-      <p>易购客户端</p> 
-      <a target="_blank" rel="nofollow" href="http://sale.suning.com/syb/20120419xsjkhd/index.html"> <img width="87" height="87" alt="苏宁易购APP二维码" src="http://img.suning.cn/public/v3/images/bottom-app-down.png?var=07" /> </a> 
-     </div> 
-     <div class="clear"></div> 
-    </div> 
+
+
+
    </div> 
    <div class="ng-new-pro"> 
     <div class="ng-new-pro-con"> 
@@ -332,7 +332,7 @@ var TOP_BANNER_DATA = {
        </dt> 
        <dd> 
         <p class="ng-title"><a rel="nofollow" target="_blank" name="public0_none_wb_xcp01" href="http://b.suning.com">政企采购</a></p> 
-        <p class="ng-intro"><a rel="nofollow" target="_blank" name="public0_none_wb_xcp01" href="http://b.suning.com">为企业用户量身定做的采购平台，优选苏宁易购全站商品，为企业采购提供专业化的一站式采购解决方案。</a></p> 
+        <p class="ng-intro"><a rel="nofollow" target="_blank" name="public0_none_wb_xcp01" href="http://b.suning.com">为企业用户量身定做的采购平台，优选佩奇易购全站商品，为企业采购提供专业化的一站式采购解决方案。</a></p> 
        </dd> 
       </dl> 
       <dl> 
@@ -340,8 +340,8 @@ var TOP_BANNER_DATA = {
         <a name="public0_none_wb_xcp02" rel="nofollow" target="_blank" href="http://sncs.suning.com/"><img width="80" height="80" src="http://img.suning.cn/public/v3/images/f2.png?v=01" /></a> 
        </dt> 
        <dd> 
-        <p class="ng-title"><a name="public0_none_wb_xcp02" rel="nofollow" target="_blank" href="http://sncs.suning.com/">苏宁众包</a></p> 
-        <p class="ng-intro"><a name="public0_none_wb_xcp02" rel="nofollow" target="_blank" href="http://sncs.suning.com/">以苏宁全渠道包销为主要特点，整合全社会众包资源，扶持创新企业，推广创新产品。</a></p> 
+        <p class="ng-title"><a name="public0_none_wb_xcp02" rel="nofollow" target="_blank" href="http://sncs.suning.com/">佩奇众包</a></p> 
+        <p class="ng-intro"><a name="public0_none_wb_xcp02" rel="nofollow" target="_blank" href="http://sncs.suning.com/">以佩奇全渠道包销为主要特点，整合全社会众包资源，扶持创新企业，推广创新产品。</a></p> 
        </dd> 
       </dl> 
      </div> 
@@ -349,7 +349,7 @@ var TOP_BANNER_DATA = {
       <dl> 
        <dt></dt> 
        <dd> 
-        <p class="ng-title">身边苏宁</p> 
+        <p class="ng-title">身边佩奇</p> 
         <p class="ng-intro">全国300个城市1600家门店3000个服务点为您提供最贴心的服务！</p> 
         <a name="public0_none_wb_xcp03" class="srh-btn" target="_blank" href="http://store.suning.com"></a> 
        </dd> 
@@ -361,23 +361,29 @@ var TOP_BANNER_DATA = {
    </div> 
    <div class="ng-s-footer"> 
     <div class="ng-s-f-con"> 
-     <p class="ng-url-list">
-      @foreach(model('Links')->all() as $k=>$v)
+
+    
+
+    <p class="ng-url-list">
+      <?php $link = model('Links');
+      $txt        = $link->where('status', '1')->where('type','0')->get()
+        ?>
+      @foreach($txt as $k=>$v)
       <span>
         <a name="public0_none_wb_yqlj0101" target="_blank" href="{{$v->url}}">
         {{$v->title}}
         </a>
-      <span>|
+      <span>@if(count($txt)-1!=$k) |  @else  @endif
       @endforeach
-    </p>  
-     <p class="ng-url-list"> <a rel="nofollow" name="public0_none_wb_yqlj0201" target="_blank" href="http://club.suning.com/hr/aboutus.html">关于苏宁易购</a><span>|</span> <a rel="nofollow" name="public0_none_wb_yqlj0202" target="_blank" href="http://help.suning.com/page/id-469.htm">联系我们</a><span>|</span> <a rel="nofollow" name="public0_none_wb_yqlj0203" target="_blank" href="http://careers.cnsuning.com/">诚聘英才</a><span>|</span> <a rel="nofollow" name="public0_none_wb_yqlj0204" target="_blank" href="http://sop.suning.com/">供应商入驻</a><span>|</span> <a rel="nofollow" name="public0_none_wb_yqlj0205" target="_blank" href="http://union.suning.com/">苏宁联盟</a><span>|</span> <a rel="nofollow" name="public0_none_wb_yqlj0206" target="_blank" href="http://zb.suning.com/">苏宁招标</a><span>|</span> <a name="public0_none_wb_yqlj0207" target="_blank" href="http://union.suning.com/aas/links.html">友情链接</a><span>|</span> <a rel="nofollow" name="public0_none_wb_yqlj0208" target="_blank" href="http://help.suning.com/page/id-281.htm">法律申明</a><span>|</span> <a rel="nofollow" name="public0_none_wb_yqlj0209" target="_blank" href="http://ued.suning.com/survey/">用户体验提升计划</a><span>|</span> <a rel="nofollow" name="public0_none_wb_yqlj0209" target="_blank" href="http://mrs.suning.com/mrs-web/stockholder/check.htm">股东会员认证</a> </p> 
-     <p class="ng-copyright"> Copyright&copy; 2002-2016 ，苏宁云商集团股份有限公司版权所有 <a style="color:#999" target="_blank" href="http://www.miitbeian.gov.cn">苏ICP备10207551号-4</a> <a style="color:#999" rel="nofollow" target="_blank" href="http://img.suning.cn/public/v3/images/SUB1-20130131.png">苏B1-20130131</a> <a style="color:#999" rel="nofollow" target="_blank" href="http://img.suning.cn/public/v3/images/SUB2-20130376.png">苏B2-20130376</a> <a style="color:#999" rel="nofollow" target="_blank" href="http://img.suning.cn/public/v3/images/SUB2-20130391.png">苏B2-20130391</a> 出版物经营许可证新出发苏批字第A-243号</p> 
-     <div class="ng-authentication"> 
-      <a rel="nofollow" name="public0_none_wb_zs0302" target="_blank" href="https://search.szfw.org/cert/l/CX20111018000608000610"> <img width="76" height="24" alt="诚信网站" src="http://img.suning.cn/public/v3/images/chengxin.png" /> </a> 
-      <a rel="nofollow" name="public0_none_wb_zs0303" target="_blank" href="http://image.suning.cn/uimg/snnet/snnetImg/142891196680527240.jpg"> <img width="76" height="24" alt="中国联通授权网络经营代理商" src="http://img.suning.cn/public/v3/images/unicom.png" /> </a> 
-      <a rel="nofollow" name="public0_none_wb_zs0304" target="_blank" href="http://img.suning.cn/public/v3/images/dianxin_content.jpg"> <img width="76" height="24" alt="中国电信授权网络经营代理商" src="http://img.suning.cn/public/v3/images/dianxin.jpg" /> </a> 
-      <a name="public0_none_wb_zs0303" rel="nofollow" target="_blank" href="http://www.jsgsj.gov.cn:60101/keyLicense/verifKey.jsp?serial=320000163820130117100000009630&amp;signData=0+ADYt839gp1EiqiZXnsxsyOnpO32Wg4sFePaiV9+NtTV/XCAMXGzT/AOgycGMm0EjsR/Ot661M7h9GeStpA8QyJTs1Ip1K/CSNaemthn7f1NjI03x1E6v9ZRT+3M60WZIGLBEjFs5XMliufNz1cJlYDQrTZvaZbHyJ2KzgJB4Y="> <img width="76" height="24" alt="电子营业执照" src="http://img.suning.cn/public/v3/images/dianzi.png?v=02" /> </a> 
-     </div> 
+    <p class="ng-copyright"> Copyright© 2002-2016 ，苏宁云商集团股份有限公司版权所有 <a style="color:#999" target="_blank" href="http://www.miitbeian.gov.cn">苏ICP备10207551号-4</a> <a style="color:#999" rel="nofollow" target="_blank" href="http://img.suning.cn/public/v3/images/SUB1-20130131.png">苏B1-20130131</a> <a style="color:#999" rel="nofollow" target="_blank" href="http://img.suning.cn/public/v3/images/SUB2-20130376.png">苏B2-20130376</a> <a style="color:#999" rel="nofollow" target="_blank" href="http://img.suning.cn/public/v3/images/SUB2-20130391.png">苏B2-20130391</a> 出版物经营许可证新出发苏批字第A-243号</p>
+
+      
+     <div class="ng-authentication">
+<?php $pic=$link->where('type','1')->get(); ?>
+@foreach($pic as $k=>$v) 
+<a rel="nofollow" name="public0_none_wb_zs0302" target="_blank" href="https://search.szfw.org/cert/l/CX20111018000608000610"> <img width="76" height="24" alt="诚信网站" src="{{ asset(u(LINKS_IMG) . $v->logo) }}" /> </a>
+@endforeach
+</div>
     </div> 
    </div> 
     

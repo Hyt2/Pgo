@@ -10,8 +10,12 @@
 Route::any('admin/login','Admin\LoginController@login'); // 用户登录
 Route::any('admin/dologin','Admin\LoginController@dologin'); // 用户登录
 Route::any('admin/cap','Admin\LoginController@captcha'); // 用户登录
-
 Route::get('admin/index', 'Admin\IndexController@index')->middleware('adminlogin'); // 后台首页
+Route::any('admin/logout', 'Admin\LoginController@logout'); // 退出登录
+Route::any('admin/profile', 'Admin\LoginController@profile'); // 修改头像
+Route::any('admin/doprofile', 'Admin\LoginController@doprofile'); 
+Route::any('admin/pass', 'Admin\LoginController@pass'); // 修改密码
+Route::any('admin/dopass', 'Admin\LoginController@dopass'); // 
 
 
 Route::group(['middleware' => ['adminlogin','roleper'],'prefix' => 'admin', 'namespace' => 'Admin'],
@@ -21,7 +25,7 @@ function () {
 	Route::resource('links', 'LinksController'); // 友情链接
 	Route::resource('goods_attr', 'GoodsAttrController'); // 友情链接
 	Route::resource('goods_brand', 'GoodsBrandController'); // 商品品牌
-	Route::resource('admin', 'AdminController'); // 管理员
+	Route::resource('admin', 'AdminController'); // 友情链接
 	Route::resource('goods_cate', 'CateController'); // 友情链接
 
 	Route::resource('notice', 'NoticeController'); // 后台商品公告
@@ -34,14 +38,16 @@ function () {
 	Route::any('conf/info/', 'ConfController@info'); // 配置项
 	Route::resource('conf', 'ConfController'); // 系统配置
 
+
 	// 前后台用户模块
 	Route::resource('user', 'UserController'); // 前台用户
 
 	//轮播图模块
 	Route::resource('ad', 'AdController'); // 前台用户
 
-	Route::any('profile', 'LoginController@profile'); // 修改头像
-	Route::any('doprofile', 'LoginController@doprofile');
+	Route::resource('order', 'OrderController'); // 订单管理
+	Route::get('order/{id}/show', 'OrderController@showOrder');
+	Route::get('order/{id}/send', 'OrderController@send');
 
 
 	//RBAC
@@ -51,6 +57,7 @@ function () {
     Route::any('do_user_role','UserRoleController@do_user_role'); //管理员-角色
     Route::get('role_per/{id}','RolePerController@index'); //管理员-权限
     Route::any('do_role_per','RolePerController@do_role_per'); //管理员-权限
+
 });
 
 

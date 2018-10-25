@@ -1,5 +1,6 @@
 @extends('layout.admin')
 @section('title',$title)
+@section('url',url('admin/permission/create'))
 
 @section('content')
 

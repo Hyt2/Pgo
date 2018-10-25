@@ -5,7 +5,7 @@
 @section('content')
 <div class="page-body">
                     
-    <div class="row">
+<div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12">
         <div class="widget">
             <div class="widget-header bordered-bottom bordered-blue">
@@ -58,5 +58,5 @@
     </div>
 </div>
 
-</div>
+                </div>
 @endsection

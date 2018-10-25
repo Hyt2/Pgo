@@ -423,7 +423,7 @@ $(function(){
           data : {uemail:getv('uemail'),uname:getv('uname')},
           success : function(data){
               if(data.status=='1'){
-                    $('.getcode').attr('disabled',true).text(299);
+                    $('.getcode').attr('disabled',true).text(59);
                     tem();
                     $('.reg-step li').eq(1).addClass('current');
                     layer.msg(data.msg, {icon: 6,time:1000});
@@ -450,7 +450,7 @@ $(function(){
                   
                   if(data.status=='1'){
                     // layer.msg(data.msg, {icon: 6,time:1000});
-                    location.href="{{url('/reg/reg_success/a6&!333')}}";
+                    location.href="{{url('/regsuccess/a5888')}}";
                   }else{
                     layer.msg(data.msg, {icon: 5,time:1000});
                   }

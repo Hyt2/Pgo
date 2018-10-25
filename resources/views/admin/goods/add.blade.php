@@ -41,35 +41,6 @@
                                         </div>
                                         <p class="help-block col-sm-4 red">* 必填</p>
                                     </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="col-lg-2 control-label">推荐位</label>
-                                        <div class="col-lg-6">
-                                            <div class="checkbox" style="margin-left:-18px;">
-                                                <label>
-                                                    <input type="checkbox" value="0" name="goods_tj[]" class="colored-blue" >
-                                                    <span class="text">热卖商品</span>
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" value="1" name="goods_tj[]" class="colored-blue" >
-                                                    <span class="text">限时抢购</span>
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" value="2" name="goods_tj[]" class="colored-blue" >
-                                                    <span class="text">新品推荐</span>
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" value="3" name="goods_tj[]" class="colored-blue" >
-                                                    <span class="text">精品推送</span>
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" value="4" name="goods_tj[]" class="colored-blue" >
-                                                    <span class="text">首页商品</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">商品主图</label>
                                         <div class="col-sm-6" style="margin-top: 5px">

@@ -24,6 +24,10 @@ Purchase: http://wrapbootstrap.com
     <link href="{{ asset(_ADMIN_ . '/css/weather-icons.min.css') }}" rel="stylesheet" />
     <link href="{{ asset(_ADMIN_ . '/css/layui.css') }}" rel="stylesheet" />
 
+
+    @section('css')
+
+    @show
     <!--Fonts-->
     <!--     <link href="http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css"> -->
 
@@ -84,7 +88,7 @@ Purchase: http://wrapbootstrap.com
             <div class="navbar-header pull-left">
                 <a href="#" class="navbar-brand">
                     <small>
-                        <img src="{{ asset(_ADMIN_ . '/img/logo.png') }}" alt="" />
+                        <img src="{{ asset(u(_CONF_IMG) . config('site.logo')) }}" alt="" />
                     </small>
                 </a>
             </div>
@@ -96,39 +100,56 @@ Purchase: http://wrapbootstrap.com
             </div>
             <!-- /Sidebar Collapse -->
             <!-- Account Area and Settings --->
+
             <div class="navbar-header pull-right">
                 <div class="navbar-account">
                     <ul class="account-area">
+                        @php
+
+                           $rs =DB::table('admin')->where('id',session('id'))->first();
+
+                            @endphp
 
 
                         <li>
+
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
-                                <div class="avatar" title="View your public profile">
-                                    <img src="{{ asset(_ADMIN_) }}/img/avatars/adam-jansen.jpg">
+                                <div id="admin_img"  class="avatar" title="View your public profile">
+                                    
+                                    <img src="{{_ADMIN_IMG.'/'.$rs->img}}" >
+                                    
+                                    <script>
+                                        $('#admin_img').attr('style', 'border-left: #5DB2FF')
+                                    </script>
+        
                                 </div>
                                 <section>
-                                    <h2><span class="profile"><span>admin</span></span></h2>
+                                    <h2><span class="profile"><span>{{$rs->name}}</span></span></h2>
                                 </section>
                             </a>
                             <!--Login Area Dropdown-->
+
+                            
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                                 <li class="username"><a>David Stevenson</a></li>
-                                <li class="email"><a>David.Stevenson@live.com</a></li>
-                                <!--Avatar Area-->
-                                <li>
-                                    <div class="avatar-area">
-                                        <img src="{{ asset(_ADMIN_) }}/img/avatars/adam-jansen.jpg" class="avatar">
-                                        <span class="caption">Change Photo</span>
-                                    </div>
+                                <li class="edit" style="text-align:center">
+                                    <a href="/admin/profile" class="pull-center">►修改头像</a>
                                 </li>
+                                <li class="edit" style="text-align:center">
+                                    <a href="/admin/pass" class="pull-center">►修改密码</a>
+                                </li>
+                                
+                                
                                 <!--Avatar Area-->
-                                <li class="edit">
-                                    <a href="profile.html" class="pull-left">Profile</a>
-                                    <a href="#" class="pull-right">Setting</a>
+                                
+                                <!--Avatar Area-->
+                                <li class="edit" style="text-align:center">
+                                    <a class="pull-center" >▼选择背景色</a>
+                                    
                                 </li>
                                 <!--Theme Selector Area-->
                                 <li class="theme-area">
-                                    <ul class="colorpicker" id="skin-changer">
+                                    <ul class="colorpicker" id="skin-changer" style="margin-left: 8px">
                                         <li><a class="colorpick-btn" href="#" style="background-color:#5DB2FF;" rel="{{ asset(_ADMIN_ . '/css/skins/blue.min.css') }}"></a></li>
                                         <li><a class="colorpick-btn" href="#" style="background-color:#2dc3e8;" rel="{{ asset(_ADMIN_ . '/css/skins/azure.min.css') }}"></a></li>
                                         <li><a class="colorpick-btn" href="#" style="background-color:#03B3B2;" rel="{{ asset(_ADMIN_ . '/css/skins/teal.min.css') }}"></a></li>
@@ -144,10 +165,14 @@ Purchase: http://wrapbootstrap.com
                                     </ul>
                                 </li>
                                 <!--/Theme Selector Area-->
-                                <li class="dropdown-footer">
-                                    <a href="login.html">
+                                <!-- <li class="dropdown-footer">
+                                    <a href="/admin/logout">
                                         退出登录
                                     </a>
+                                </li> -->
+
+                                <li class="edit" style="text-align:center">
+                                    <a href="/admin/logout" class="pull-center">►退出登录</a>
                                 </li>
                             </ul>
                             <!--/Login Area Dropdown-->
@@ -156,16 +181,9 @@ Purchase: http://wrapbootstrap.com
                         <!--Note: notice that setting div must start right after account area list.
                         no space must be between these elements-->
                         <!-- Settings -->
-                    </ul><div class="setting">
-                        <a id="btn-setting" title="Setting" href="#">
-                            <i class="icon glyphicon glyphicon-cog"></i>
-                        </a>
-                    </div><div class="setting-container">
-
-                        <label>
-                            <input type="checkbox" id="checkbox_fixedbreadcrumbs">
-                            <span class="text">在线</span>
-                        </label>
+                    </ul>
+                    <!-- <div class=""><font size="2px" color="white">点击头像<br>修改信息</font></div> -->
+                    <div class="setting-container">
 
                     </div>
                     <!-- Settings -->
@@ -221,9 +239,7 @@ Purchase: http://wrapbootstrap.com
 
                     </ul>
                 </li>
-<<<<<<< HEAD
-                <li>
-=======
+
 
                 <li >
                     <a href="#" class="menu-dropdown">
@@ -289,7 +305,6 @@ Purchase: http://wrapbootstrap.com
                 </li>
 
                  <li>
->>>>>>> hyt
                     <a href="#" class="menu-dropdown">
                         <i class="menu-icon fa fa-user-md"></i>
                         <span class="menu-text"> 用户管理 </span>
@@ -304,6 +319,7 @@ Purchase: http://wrapbootstrap.com
                         </li>
                     </ul>
                 </li>
+
                 <li>
                     <a href="#" class="menu-dropdown">
                         <i class="menu-icon fa fa-shopping-cart"></i>
@@ -428,6 +444,25 @@ Purchase: http://wrapbootstrap.com
                 </li>
 
 
+                 <li>
+                    <a href="#" class="menu-dropdown">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text"> 订单管理 </span>
+                        <i class="menu-expand"></i>
+                    </a>
+
+                    <ul class="submenu">
+
+                        <li>
+                            <a href="{{ url('admin/order') }}">
+                                <span class="menu-text">浏览订单</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
 
                 <li>
                     <a href="#" class="menu-dropdown">
@@ -540,7 +575,7 @@ Purchase: http://wrapbootstrap.com
                                 <i class="menu-expand"></i>
                             </a>
                         </li>
-
+                        
                     </ul>
                 </li>
 
@@ -882,8 +917,10 @@ Purchase: http://wrapbootstrap.com
                         if(data.status == 0){
                             layer.msg(data.msg, {icon: 6});
                             location.href = $url;
-                        } else {
+                        } else if (data.statys == 1) {
                             layer.msg(data.msg, {icon: 5});
+                        } else {
+                            layer.msg('您没有该权限!', {icon: 5});
                         }
                     });
         }, function(){

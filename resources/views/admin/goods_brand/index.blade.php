@@ -27,7 +27,10 @@
                                 <tr>
                                     <td align="center">{{$v->id}}</td>
                                     <td align="center">{{$v->brand_name}}</td>
-                                    <td><a href="{{ $v->brand_url }}add.blade.php" target="_blank">{{$v->brand_url}}</a></td>
+                                    <td>
+                                        {{ cut_str($v->brand_url, 10) }}
+                                        </a>
+                                    </td>
                                     <td align="center">
                                     	@if($v->brand_logo)
                                         	<img src="{{url('/static/uploads/goods_brand/'.$v->brand_logo)}}" height="30">
@@ -36,7 +39,7 @@
                                     		暂无图片
                                 		@endif
                                      </td>
-                                    <td>{{$v->brand_desc}}</td>
+                                    <td>{{ cut_str($v->brand_desc, 20) }}</td>
                                     <td align="center">
                                     	@if($v->status == 1)
                                     		显示

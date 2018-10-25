@@ -16,6 +16,7 @@
                     <form class="form-horizontal" role="form" action="{{ url('admin/admin/' . $admin->id) }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label no-padding-right">管理员名</label>
                             <div class="col-sm-6">
@@ -35,7 +36,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label no-padding-right">邮箱</label>
                             <div class="col-sm-6">
-                                <input class="form-control" placeholder="" name="email" value="{{ $admin->name }}" required="" type="text">
+                                <input class="form-control" placeholder="" name="email" value="{{ $admin->email }}" required="" type="text">
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
                         </div>

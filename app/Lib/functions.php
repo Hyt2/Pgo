@@ -35,6 +35,20 @@ function db($table_name)
 
 
 /**
+ * 快速实例化数据库验证器
+ * @author [阳] <[<email 1025958116@qq.com>]>
+ */
+function validate($data, $rules, $message)
+{
+    $validator  = Illuminate\Support\Facades\Validator::make($data, $rules, $message);
+    if ($validator->fails()) {
+        return $validator;
+    }
+}
+
+
+
+/**
  * [msg 提示视图,重定向]
  * @author [阳] <[<email 1025958116@qq.com>]>
  * @param $msg        [提示信息]

@@ -36,7 +36,7 @@
                                 <th class="text-center">管理员</th>
                                 <th class="text-center">用户头像</th>
                                 <th class="text-center">邮箱</th>
-                                <th class="text-center" width="10%">最后登录</th>
+                                <th class="text-center" width="15%">最后登录</th>
                                 <th class="text-center" width="10%">状态</th>
                                 <th class="text-center" width="20%">操作</th>
                             </tr>
@@ -55,11 +55,15 @@
                                 </td>
                                 <td align="center">{{ $admin->email }}</td>
                                 <td align="center">
+                                    @if($admin->last_time == 0)
                                     <font color="#db7093">还未登录</font>
+                                    @else
+                                        {{date('Y-m-d H:i:s', $admin->last_time)}}
+                                    @endif
                                 </td>
                                 <td align="center">
                                     <label>
-                                        <input id="{{ $admin->id }}"  class="checkbox-slider colored-darkorange" type="checkbox" onclick="changestatus(this);" @if($admin->status == 1) checked @endif>
+                                        <input @if($admin->id == session('id')) disabled @endif id="{{ $admin->id }}"  class="checkbox-slider colored-darkorange" type="checkbox" onclick="changestatus(this);" @if($admin->status == 1) checked @endif>
                                         <span class="text" style="cursor:pointer;"></span>
                                     </label>
                                 </td>

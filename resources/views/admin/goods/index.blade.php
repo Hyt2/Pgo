@@ -117,6 +117,7 @@
                             <tbody>
 
                             @foreach($res as $k=>$v)
+
                                 <tr class="odd" align="center">
                                     <td class=" ">
                                         <div class="checker"><span class="">{{$v->id}}<input type="checkbox" class="checkboxes" value="1"></span></div>

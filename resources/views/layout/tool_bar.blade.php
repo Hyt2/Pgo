@@ -1,8 +1,35 @@
+<script>
+
+  function check() {
+    var u = '<?php 
+      if(!session('UserInfo')){
+          echo 0;
+      } else {
+          echo 1;
+      }
+    ?>';
+
+    if (u == 0) {
+        alert('您还未登录,请先登录!');
+        setTimeout(function() {
+          window.location.href = '/login';
+        }, 3000);
+    }
+  }
+    
+</script>
 <script type="text/javascript" src="{{ asset( _PLUS_ .'/layer/layer.js') }}"></script>
  <div id="_TOP_BANNER_" class="ng-top-banner"></div> 
   <div class="ng-toolbar"> 
    <div class="ng-toolbar-con wrapper"> 
-
+    <div class="ng-toolbar-left"> 
+     <a href="{{url('/')}}" class="ng-bar-node ng-bar-node-backhome" id="ng-bar-node-backhome" name="public0_none_dbgjt_fhyisy01"> <i class="ng-iconfont ng-backhome"></i><span>返回易购首页</span> <i class="ng-line ng-iconfont ml10"></i> </a> 
+     <script type="text/javascript">
+if (!sn.isHome){document.getElementById('ng-bar-node-backhome').style.display = "block";};
+</script> 
+    
+     
+    </div> 
     <div class="ng-toolbar-right"> 
      <!-- 登录注册 --> 
      <a href="javascript:void(0)" class="ng-bar-node username-bar-node username-bar-node-showside" id="username-node" rel="nofollow" style="display:none;"> <span id="usernameHtml01"></span> <em class="hasmsg ng-iconfont"></em> </a> 
@@ -13,6 +40,7 @@
        <a href="javascript:SFE.base.logoff();" rel="nofollow">退出登录</a> 
       </div> 
      </div> 
+
      @if(empty(session('UserInfo'))) 
        <div class="ng-bar-node reg-bar-node" id="reg-bar-node"> 
         <a href="{{url('login')}}" name="public0_none_dbgjt_login0800" rel="nofollow" class="login">登录</a> 
@@ -56,26 +84,38 @@ regBarNode.style.display = "block";
 </script> 
      <!--我的订单 [[--> 
      <div class="ng-bar-node-box myorder-handle"> 
-      <a href="member_order.html?storeId=10052&amp;catalogId=10051" rel="nofollow" name="public0_none_dbgjt_order04" class="ng-bar-node ng-bar-node-fix touch-href ng-bar-node-pr5"><span>我的订单</span><em class="ng-iconfont down"></em></a> 
+      <a href="{{ url('order') }}" rel="nofollow" name="public0_none_dbgjt_order04" class="ng-bar-node ng-bar-node-fix touch-href ng-bar-node-pr5"><span>我的订单</span><em class="ng-iconfont down"></em></a> 
       <div class="ng-down-box ng-d-box myorder-child" style="display:none;"> 
-       <a href="member_order.html?catalogId=10051&amp;storeId=10052&amp;selectTime=all&amp;status=M" rel="nofollow" name="public0_none_dbgjt_order0401">待支付<em id="waitPayCounts"></em></a> 
-       <a href="member_order.html?catalogId=10051&amp;storeId=10052&amp;selectTime=all&amp;status=C000" rel="nofollow" name="public0_none_dbgjt_order0402">待收货<em id="waitDeliveryCounts"></em></a> 
-       <a href="member_comments.html" rel="nofollow" name="public0_none_dbgjt_order0403">待评价<em id="waitEvaluation"></em></a> 
-       <a href="http://member.suning.com/emall/SNLingYueGoodsOrderView?storeId=10052&amp;catalogId=10051" rel="nofollow" name="public0_none_dbgjt_order0404">修改订单</a> 
+       <a href="{{ url("order/waitPay") }}" rel="nofollow" name="public0_none_dbgjt_order0401">待支付<em id="waitPayCounts"></em></a> 
+       <a href="{{ url('order/waitReceive') }}" rel="nofollow" name="public0_none_dbgjt_order0402">待收货<em id="waitDeliveryCounts"></em></a>  
       </div> 
      </div> 
      <!--我的订单 ]]--> 
-
+     <!--我的易购 [[--> 
+     <div class="ng-bar-node-box mysuning-handle"> 
+      <a href="{{url('/userinfo')}}" rel="nofollow" name="public0_none_dbgjt_wdyg05" class="ng-bar-node ng-bar-node-fix touch-href ng-bar-node-pr5"><span>我的易购</span><em class="ng-iconfont down"></em></a> 
+      <div class="ng-down-box ng-d-box mysuning-child" style="display:none;"> 
+       <a href="http://2.suning.com/myOrder/queryMyOrders.do" name="public0_none_dbgjt_wdyg0501" rel="nofollow" target="_blank">我的二手</a> 
+       <a href="https://passport.suning.com/ids/trustLogin?sysCode=epp&amp;targetUrl=http://my.jr.suning.com/sfp/accountAssets/index.htm" rel="nofollow" name="public0_none_dbgjt_wdyg0502" target="_blank">我的金融</a> 
+       <a href="member_collect_goods.html" rel="nofollow" name="public0_none_dbgjt_wdyg0503">我的收藏</a> 
+       <a href="https://rxf.suning.com/epps-cpf/accountMgt/assetOverview.do" rel="nofollow">我的任性付</a> 
+       <a href="member_coupon.html?storeId=10052&amp;catalogId=10051" rel="nofollow" name="public0_none_dbgjt_wdyg0504">我的优惠券</a> 
+       <a href="http://vip.suning.com/sign/welcome.do" rel="nofollow" name="public0_none_dbgjt_wdyg0505">打卡赚云钻</a> 
+       <a href="http://vip.suning.com" class="ng-vip-union" target="_blank" rel="nofollow" name="public0_none_dbgjt_wdyg0506">会员联盟<em class="ng-iconfont"></em></a> 
+      </div> 
+     </div> 
+     <!--我的易购 ]]--> 
      <!-- 购物车 --> 
-     <a class="ng-bar-node ng-bar-node-mini-cart" name="public0_none_minicart_gouwclj" rel="nofollow" href="cart.html?langId=-7&amp;storeId=10052&amp;catalogId=10051"> <em class="ng-iconfont cart"></em><span>购物车</span> <span class="total-num-box" id="J_total_num_box"> <b class="total-num J_cart_total_num" id="showTotalQty">0</b> <span class="total-num-bg-box"> <em></em> <i></i> </span> </span> </a> 
+     <a class="ng-bar-node ng-bar-node-mini-cart" name="public0_none_minicart_gouwclj" rel="nofollow" href="{{ url('cart') }}"> <em class="ng-iconfont cart"></em><span>购物车</span> <span class="total-num-box" id="J_total_num_box">  <span class="total-num-bg-box"> <em></em> <i></i> </span> </span> </a> 
      <script type="text/javascript">
 var ngCartNum = d("totalProdQty");
 ngCartNum = ( ngCartNum ==0 || ngCartNum == null )?0:ngCartNum;
 ngCartNum = ngCartNum>99?'99+':ngCartNum;
 document.getElementById('showTotalQty').innerHTML = ngCartNum;
 </script> 
-
-
+     
+    
+    
     </div> 
     <div id="ng-minicart-slide-box"></div> 
    </div> 

@@ -26,7 +26,7 @@
   <div class="login-main"> 
    <!--顶部logo区域 [[--> 
    <div class="login-logo"> 
-		    <a href="{{url('/')}}" title="苏宁易购"><img alt="苏宁易购" src="{{_HOME_}}/images/snlogo.png" /></a>
+		    <a href="{{url('/')}}" title="苏宁易购"><img alt="苏宁易购" src="{{ u(_CONF_IMG) . config('site.logo')}}" /></a>
    </div> 
    <!--顶部logo区域 ]]--> 
    <!--登录区域 表单 [[--> 
@@ -52,7 +52,7 @@
     <div class="login-code" id="imageVerifyArea"> 
      <div id="code-txtboxId" class="code-txtbox"> 
       <i class="ico-code"></i> 
-      <input class="txt-input" type="text" id="validate" autocomplete="off" maxlength="4" name="validate" tabindex="3"  class="validate" /> 
+      <input class="txt-input" type="text" id="validate" autocomplete="off" maxlength="5" name="validate" tabindex="3"  class="validate" /> 
       <em id="imageVerifytip" class=""></em> 
       <label class="input-label">验证码</label> 
      </div> 
@@ -78,7 +78,7 @@
       <b class="b1">◆</b> 
       <b class="b2">◆</b>持有苏宁电器/乐购仕会员卡登录，线上线下云钻共享来购物！ 
      </div> 
-     <a href="{{url('/forget')}}" class="link-left" id="Logon_index_denglu001" name="Logon_index_denglu001" target="_blank">忘记密码</a> 
+     <a href="{{url('/forget')}}" class="link-left" id="Logon_index_denglu001" name="Logon_index_denglu001">忘记密码</a> 
      <span class="link-left mid-line"></span> 
      <a href="{{url('/register')}}" class="link-left" name="Logon_index_denglu003" id="Logon_index_denglu003">免费注册</a> 
      <a href="javascript:void(0);" class="link-right" name="Logon_index_denglu012" id="Logon_index_denglu010"><i></i>会员卡融合</a> 
@@ -183,14 +183,16 @@
 			}
 			,function(data){
 			if(data.status=='0'){//验证码错误
+
 				$('.err-msg').removeClass('hide').text(data.msg);
 				$('.code-txtbox').css({border:'1px solid red'});
 			}else if(data.status=='1'){
 				location.replace('/');
-			}else{//用户或密码错误
+			}else if(data.status=='4') {
+        location.replace('/goodslist/' + data.gid);
+      } else {//用户或密码错误
 				$('.err-msg').removeClass('hide').text(data.msg);
 			}
-      console.log(data);
 			getCode();
 		})
 	}

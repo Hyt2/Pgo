@@ -9,9 +9,17 @@
             <a id="editabledatatable_new" href="{{ url('admin/goods_cate/create') }}" class="btn btn-blue">
                <span class="glyphicon glyphicon-plus"></span>Add
             </a>
+            <form action="/admin/goods_cate" style="float: right;" method="get" id="form1">
+                <select id="cateChange" onchange="chengCate()" name="cate">
+                    <option value="">顶级分类</option>
+                    @foreach($cates as $v)
+                        <option value="{{$v->id}}">{{$v->cate_name}}</option>
+                    @endforeach
+                </select>
+            </form>
         	<form action="/admin/goods_cate" style="float: right;" method="get">
             	<span class="input-icon inverted">
-	                <input type="text" class="form-control input-sm" name="keyword" value="">
+	                <input type="text" class="form-control input-sm" name="keyword" value="{{$req->keyword}}" placeholder="分类名称查询">
 	                <i class="glyphicon glyphicon-search bg-blue"></i>
 	                <button href="#" class="btn btn-default blue">搜索</button>
 	            </span>
@@ -146,6 +154,13 @@
 	})
 	  layer.close(index);
 	});
+}
+function chengCate()
+{   
+    var cate=$('select[name=cates]').val();
+    var form1=$('#form1');
+    form1.action = "/admin/goods_cate";
+    form1.submit();
 }
 </script>
 @stop

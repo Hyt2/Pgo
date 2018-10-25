@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Home;
+
+use App\Http\Model\Admin\NoticeModel;
+use App\Http\Model\Admin\NoticeCateModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Model\Admin\AdModel;
-use App\Http\Model\Admin\GoodsBrandModel;
-use App\Http\Model\Admin\NoticeCateModel;
-use App\Http\Model\Admin\NoticeModel;
-use DB;
+
 class IndexController extends CommonController
 {
-     protected $model='Cate';
+
+    protected $model = 'Cate';
     /**
      * 前台主页
      * @url /
@@ -18,35 +18,66 @@ class IndexController extends CommonController
      */
     public function index()
     {
+
         //栏目
         $res     = model('Notice')->orderBy('id','desc')->paginate(5);
 
         //分类
-        $data    = model($this->model)->getcate();
 
         //品牌
         /*$brand = GoodsBrandModel::all();*/
-        $brand   = model('GoodsBrand')->orderBy('id','asc')->get();
+        $brand   = model('GoodsBrand')->where('status', '1')->orderBy('id','asc')->get();
 
 
-        $ads   = model('Ad')::select('src','title','ad_name')->orderBy('sort')->limit(11)->get();
-        $src   = [];
+        $ads   = model('Ad')::select('src','title','ad_name','bgcolor','url')->orderBy('sort')->limit(11)->get();
+        /*$src   = [];
+        $title = [];
+        foreach ($ads as $k => $v) {
+            $tit              = [];
+            $src['src'][]     = $v->src;
+            // $src['bgcolor'][] = $v->bgcolor;
+            $tit['title']     = $v->title;
+            $tit['ad_name']   = $v->ad_name;
+            $title[]          = $tit;
+        }
+        $ads          = [$src,$title];*/
+
+        $image   = [];
         $title = [];
         foreach ($ads as $k => $v) {
             $tit            = [];
-            $src[]          = $v->src;
+            $img            = [];
+            $img[]          = $v->src;
+            $img[]          = $v->bgcolor;
+            $img[]          = $v->url;
             $tit['title']   = $v->title;
             $tit['ad_name'] = $v->ad_name;
             $title[]        = $tit;
+            $image[]        = $img;
         }
-        $ads = [$src,$title];
+        $ads = [$image,$title];
+
+
+
+        // dd($ads);
+        $cate         = model('Cate');
+        $_cates       = $cate->where('show', '1')->where('pid', 0)->orderBy('sort', 'DESC')->take(3)->get();
+        static $cates = [];
+        foreach ($_cates as $k => $v) 
+        {
+            $cates[$v->id] = $v;
+            $cates[$v->id]['child'] = $cate->where('show', '1')->where('pid', $v->id)->orderBy('sort', 'DESC')->get();
+        }
+
 
         return view('home.index.index',[
-            'data'   => $data,
             'res'    => $res,
             'brand'  => $brand,
             'ads'    => $ads,
+            'cates'  => $cates,
         ]);
+
+
     }
 
 
@@ -63,16 +94,16 @@ class IndexController extends CommonController
             NoticeModel::where('id',$id)->update(['notice_show'=>$num]);
         }
         $res = NoticeModel::orderBy('notice_show','desc')->paginate(10);
+
         return view('home.notice_content',['content'=>$content,'res'=>$res]);
     }
+
     /**
      * 前台栏目跳转显示栏目文章
      */
     public function notice_cate($id)
     {
-//        dd($id);
         $content = NoticeModel::where('cate_id',$id)->first();
-//        dd($content);
         if($content){
             $num = $content->notice_show;
             $num ++;
@@ -84,60 +115,11 @@ class IndexController extends CommonController
         }
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    //获取二级分类
+    public function twocate(Request $req)
     {
-        //
+        return $data=model($this->model)->getcate($req->input('pid'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

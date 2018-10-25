@@ -16,7 +16,4 @@
 
 
 include __DIR__ . '/admin.php';
-
 include __DIR__ . '/home.php';
-
-

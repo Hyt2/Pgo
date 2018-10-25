@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
   <title>找回密码-安全中心</title> 
   <!-- 引入全站公用资源文件 --> 
-  <script type="text/javascript">	
-        //全局变量	
+  <script type="text/javascript"> 
+        //全局变量  
         var sn = sn || {
             "context": "/emall",
             "domain": "www.suning.com",
@@ -37,27 +37,27 @@ function logonUrl(url,logonType){
    }
  var targetUrl = encodeURIComponent(url);
  var logonurl = "https://passport.suning.com/ids/login?service="
-			 + encodeURIComponent("https://aq.suning.com/asc/auth?targetUrl="+ targetUrl)
-			 + "&method=GET&loginTheme="+logonType;
+       + encodeURIComponent("https://aq.suning.com/asc/auth?targetUrl="+ targetUrl)
+       + "&method=GET&loginTheme="+logonType;
  hrefLink(logonurl);
 }
 
 function hrefLink(e) {
-		if (navigator.userAgent.indexOf("Firefox") > 0) {
-			window.location = e
-		} else {
-			var f = document.createElement("a");
-			f.href = e;
-			document.body.appendChild(f);
-			if (/msie/i.test(navigator.userAgent.toLowerCase())) {
-				f.click()
-			} else {
-				var d = document.createEvent("MouseEvent");
-				d.initEvent("click", false, false);
-				f.dispatchEvent(d)
-			}
-		}
-	};
+    if (navigator.userAgent.indexOf("Firefox") > 0) {
+      window.location = e
+    } else {
+      var f = document.createElement("a");
+      f.href = e;
+      document.body.appendChild(f);
+      if (/msie/i.test(navigator.userAgent.toLowerCase())) {
+        f.click()
+      } else {
+        var d = document.createEvent("MouseEvent");
+        d.initEvent("click", false, false);
+        f.dispatchEvent(d)
+      }
+    }
+  };
 </script> 
   <!-- PRFLS RESOURCES --> 
   <link rel="shortcut icon" href="{{_HOME_}}/images/favicon.ico" type="image/x-icon" /> 
@@ -89,7 +89,7 @@ function hrefLink(e) {
   <!-- 引入项目模块文件 --> 
   <div class="header"> 
    <div id="snlogo" class="clearfix"> 
-    <a href="index.html" title="苏宁易购"><img alt="苏宁易购" src="https://sslres.suning.com/project/asc/style/images/snlogo.png?v=201601280042" /></a> 
+    <a href="index.html" title="苏宁易购"><img alt="苏宁易购" src="{{ u(_CONF_IMG) . config('site.logo')}}" /></a> 
     <a href="/asc/index.do" name="asc_index_navbar_logo"><span class="channel"></span></a> 
     <span class="link-cont"> <a href="/asc/index.do" name="asc_index_navbar_homepage" id="head_index">首页</a> <a href="/asc/toolservice.do" name="asc_index_securityinfo" id="head_sectool">安全工具</a> <a href="/asc/school.do" name="asc_index_navbar_school" id="head_secschool">安全学堂</a></span> 
    </div> 
@@ -217,9 +217,10 @@ function hrefLink(e) {
    </form> 
   </div>
   <script type="text/javascript">
-        var count=0;
-        var uname=null;
-        var uemail=null;
+        var set    = null;
+        var count  = 0;
+        var uname  = null;
+        var uemail = null;
         $('a[name=next]').click(function(){
           if(count==0){
             if(checkNull('.uname','请填写用户名','.text-uname')) return;
@@ -244,7 +245,7 @@ function hrefLink(e) {
             if(checkNull('.upwd','请填写新密码','.upwd-txtbox')) return;
             if(checkNull('.reupwd','请填写确认新密码','.reupwd-txtbox')) return;
             if(!updatePass()) return;
-            alert('密码重置成功,请登录！',location.href='/');
+            alert('密码重置成功,请登录！',location.href='/login');
           }
           
           $('.current').next().addClass('current');
@@ -327,7 +328,12 @@ function hrefLink(e) {
           },function(data){
               if(data.status=='0'){
                 alert(data.msg);
-              }else{
+              }else if (data.status == '1'){
+
+                $('.getcode').attr('disabled',true).text(59);
+                tem();
+                alert(data.msg);
+              } else {
                 alert(data.msg);
               }
           })
@@ -358,7 +364,6 @@ function hrefLink(e) {
                 if(data.status=='1'){
                   flag=true;
                 }
-                console.log(data);
               },
               async:false
             });

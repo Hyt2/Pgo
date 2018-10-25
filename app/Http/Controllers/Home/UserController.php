@@ -32,18 +32,15 @@ class UserController extends CommonController
                 $path      = $file->move(_UPLOADS_.'/userFile',$newName);
                 // 生成图片路径
                 $filepath  = _UPLOADS_.'/userFile/'.$newName;
-				
                 //把数据录入数据库
                 $data['uface']=$filepath;
 
                 //执行修改
-
-                $rs=model('User')->where('uname',session('UserInfo')['uname'])->update($data);
+                $rs = model('User')->where('uname',session('UserInfo')['uname'])->update($data);
                 // 更新session数据
                 session(["uface"=>$filepath]);
                 //返回文件的路径
-                if($rs) return  ['msg'=>'修改成功','src'=>$filepath,'status'=>'1'];
-
+                
                 @unlink(session('UserInfo')['uface']);
                 if($rs)
                     session('UserInfo')['uface'] = $data['uface'];
@@ -61,7 +58,6 @@ class UserController extends CommonController
     {
         //获取修改数据
         $data = $req->all();
-
         try{
             // $rs=model('User')->where('uid',)->update($data);
             $user = model('User')->find(session('UserInfo')['uid']);

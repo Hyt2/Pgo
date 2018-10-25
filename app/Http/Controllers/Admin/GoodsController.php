@@ -43,6 +43,7 @@ class GoodsController extends CommonController
         foreach ($type as $k=>$v){
             $v->type_name = str_repeat('&nbsp;',3).'|--'.$v->type_name;
         }
+
         return view('admin.goods.index',['title'=>'商品管理','title2'=>'浏览商品','res'=>$res,'type'=>$type]);
     }
 
